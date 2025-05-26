@@ -57,25 +57,21 @@ export const findByName = async (req, res) => {
     res.json(students);
 }
 
-// export const countByNames = (req, res) => {
-//     const count = repo.countByName(req.query.names);
-//     if(count) {
-//         res.json(count);
-//     }
-//     else {
-//         res.status(404).send();
-//     }
-// }
-//
-// export const findByMinScore = (req, res) => {
-//     const exam = req.params.exam;
-//     const minScore = +req.params.minscore;
-//     const students = repo.findByMinScore(exam, minScore);
-//     if (students.length > 0) {
-//         const result = students.map(({ password, ...rest }) => rest);
-//         res.json(result);
-//     } else {
-//         res.status(404).json({ message: 'No students found' });
-//     }
-// };
+export const countByNames = async (req, res) => {
+    try {
+        const namesCount = await repo.countByName(req.query.names);
+        res.json(namesCount);
+    } catch (err) {
+        console.error("DB error", err);
+        res.status(500).json({error: "Internal server error"});
+    }
+}
+
+export const findByMinScore = async (req, res) => {
+    const exam = req.params.exam;
+    const minScore = +req.params.minscore;
+    const students = (await repo.findByMinScore(exam, minScore))
+        .map(({ password, ...rest }) => rest);
+        res.json(students);
+};
 
