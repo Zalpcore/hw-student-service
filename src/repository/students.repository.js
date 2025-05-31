@@ -31,6 +31,6 @@ export async function countStudentsByNames(names) {
     return Student.countDocuments({$or: regexConditions});
 }
 
-export async function findStudentsByMinScores(exam, minScore) {
-    return Student.find({[`scores.${exam}`]: {$gte: minScore}});
+export async function findStudentsByMinScores(exam, minscore) {
+    return Student.find({[`scores.${exam}`]: {$gte: minscore}});
 }

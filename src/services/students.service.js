@@ -11,6 +11,7 @@ export const addStudent = async ({id, name, password}) => {
 
 export const findStudent = async (id) => {
     const studentFull = await repo.findStudentById(id);
+    if (!studentFull) return null;
     const studentNoPass = studentFull.toObject();
     delete studentNoPass.password;
     return studentNoPass;
@@ -18,6 +19,7 @@ export const findStudent = async (id) => {
 
 export const deleteStudent = async (id) => {
     const studentFull = await repo.deleteStudentById(id);
+    if (!studentFull) return null; // ← добавляем проверку
     const studentNoPass = studentFull.toObject();
     delete studentNoPass.password;
     return studentNoPass;
@@ -25,6 +27,7 @@ export const deleteStudent = async (id) => {
 
 export const updateStudent = async (id, data) => {
     const studentFull = await repo.updateStudentById(id, data);
+    if (!studentFull) return null;
     const studentNoScore = studentFull.toObject();
     delete studentNoScore.scores;
     return studentNoScore;

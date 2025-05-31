@@ -62,8 +62,8 @@ export const countByNames = async (req, res) => {
 }
 
 export const findByMinScore = async (req, res) => {
-    const { exam, minScore } = req.query;
-    const students = await service.findByMinScore(exam, minScore)
+    const { exam, minscore } = req.params;
+    const students = await service.findByMinScore(exam, minscore)
     res.json(students);
 };
 
