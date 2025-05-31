@@ -16,7 +16,7 @@ app.use((req, res) => {
 async function startServer() {
     try {
         await mongoose.connect(process.env.MONGO_URI, {
-            dbName: 'java59'
+            dbName: process.env.DB_NAME,
         });
         console.log('Connected to MongoDB.');
         app.listen(port, () => console.log(`Server is running on port ${port}. Press Ctrl+C to quit.`));
